@@ -27,15 +27,15 @@ Access JIRA via the nginx SSL reverse proxy:
 
 https://localhost:8081
 
-- Get a trial for Jira core
+*Get a trial for Jira core*
 
---> "Set it up for me"
---> once connected, seletc Jira Software in the dropdown list, then Jira Software (Data Center)
---> A trial is automatically inserted in the JIRA container, since we use a local volume, every JIRA data is preserved
---> Setup an admin account
---> Wait for the end of the process
---> You may end up with an empty white error page, no worries, just refresh at the root URL after 5 minutes to let time enough for the initialisation of JIRA
---> logs can be accessed easily within the volume
+- "Set it up for me"
+- once connected, seletc Jira Software in the dropdown list, then Jira Software (Data Center)
+- A trial is automatically inserted in the JIRA container, since we use a local volume, every JIRA data is preserved
+- Setup an admin account
+- Wait for the end of the process
+- You may end up with an empty white error page, no worries, just refresh at the root URL after 5 minutes to let time enough for the initialisation of JIRA
+- logs can be accessed easily within the volume
 
 Once JIRA is ready, follow the process and create a new project. (Basic software development for instance)
 
