@@ -1,0 +1,3 @@
+jira-volume/*
+!jira-volume/README
+.DS_Store

@@ -1,0 +1,71 @@
+version: '3.7'
+services:
+
+  # on prem jira
+  jira:
+    image: atlassian/jira-software
+    hostname: jiraback
+    restart: unless-stopped
+    user: 'root'
+    environment:
+      - ATL_PROXY_NAME=localhost
+      - ATL_TOMCAT_SECURE=true
+      - ATL_PROXY_PORT=8081
+      - ATL_TOMCAT_SCHEME=https      
+    volumes:
+      - ./jira-volume:/var/atlassian/application-data/jira
+    ports:
+      - "8080:8080"
+
+  # SSL proxy
+  nginx:
+    image: nginx:latest
+    restart: unless-stopped
+    hostname: jira
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/jira.cert:/etc/nginx/cert/jira.cert
+      - ./nginx/jira.key:/etc/nginx/cert/jira.key
+    ports:
+      - 8081:8081
+      - 443:443
+
+  # Splunk main - cannot communicate with on-prem Jira
+  remote1:
+    image: splunk/splunk:latest
+    hostname: remote1
+    ports:
+      - "8000:8000"
+    environment:
+      SPLUNK_START_ARGS: "--accept-license"
+      SPLUNK_PASSWORD: "ch@ngeM3"
+    volumes:
+      - ./JIRA-app-for-the-remove-search-head/TA-jira-service-desk-simple-addon:/opt/splunk/etc/apps/TA-jira-service-desk-simple-addon
+      - ./TA-config-remote-search-head:/opt/splunk/etc/apps/TA-config-remote-search-head
+      - ./TA-jira-unit-tests:/opt/splunk/etc/apps/TA-jira-unit-tests
+    
+  # Splunk indexer
+  idx1:
+    image: splunk/splunk:latest
+    hostname: idx1
+    ports:
+      - "9997:9997"
+      - "8088:8088"
+    environment:
+      SPLUNK_START_ARGS: "--accept-license"
+      SPLUNK_PASSWORD: "ch@ngeM3"
+    volumes:
+      - ./TA-config-indexer:/opt/splunk/etc/apps/TA-config-indexer
+
+  # Splunk Hybrid search head - can search the indexer and access JIRA on prem via nginx
+  hybrid1:
+    image: splunk/splunk:latest
+    hostname: hybrid1
+    ports:
+      - "8001:8001"
+    environment:
+      SPLUNK_START_ARGS: "--accept-license"
+      SPLUNK_PASSWORD: "ch@ngeM3"
+    volumes:
+      - ./JIRA-app-for-the-hybrid-search-head/TA-jira-service-desk-simple-addon:/opt/splunk/etc/apps/TA-jira-service-desk-simple-addon
+      - ./TA-config-hybrid-search-head:/opt/splunk/etc/apps/TA-config-hybrid-search-head

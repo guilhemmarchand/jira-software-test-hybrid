@@ -1,0 +1,33 @@
+[savedsearches/JIRA%20Add-on%20unit%20test%20003%20-%20Complex%20content%20with%20dedup%20partial%20content%20enabled]
+version = 8.0.6
+modtime = 1600598306.952673000
+
+[savedsearches/JIRA%20Add-on%20unit%20test%20002%20-%20Complex%20content%20with%20dedup%20full%20enabled]
+version = 8.0.6
+modtime = 1600598303.525131000
+
+[savedsearches/JIRA%20Add-on%20unit%20test%20001%20-%20Complex%20content]
+version = 8.1.2
+modtime = 1615243739.939538000
+
+[savedsearches/JIRA%20Add-on%20unit%20test%20004%20-%20Complex%20content%20with%20CSV%20attachment]
+version = 8.0.6
+modtime = 1600598310.267147000
+
+[savedsearches/JIRA%20Add-on%20unit%20test%20005%20-%20Complex%20content%20with%20JSON%20attachment]
+version = 8.0.6
+modtime = 1600598313.575563000
+
+[savedsearches/JIRA%20Add-on%20unit%20test%20006%20-%20Complex%20content%20with%20no%20custom%20fields]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.1.2
+modtime = 1615244787.581831000
+
+[savedsearches/JIRA%20Add-on%20unit%20test%20007%20-%20Complex%20content%20with%20dedup%20partial%20content%20enabled%20no%20custom%20fields]
+access = read : [ * ], write : [ admin ]
+export = none
+owner = admin
+version = 8.1.2
+modtime = 1615245780.755199000
